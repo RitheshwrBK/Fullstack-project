@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Artifact",
+      "Bash(powershell *)",
+      "Bash(dir C:\\\\Users\\\\ADMIN\\\\Desktop\\\\Fullstack project *)"
+    ]
+  }
+}

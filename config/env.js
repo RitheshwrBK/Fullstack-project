@@ -1,0 +1,15 @@
+import {config} from 'dotenv';
+
+config({path: `.env.${process.env.NODE_ENV || 'development.local'}`});
+
+export const { 
+    PORT, NODE_ENV,
+    DB_URI,
+    JWT_SECRET, JWT_EXPIRES_IN,
+    ARCJET_KEY,ARCJET_ENV,
+    QSTASH_TOKEN,QSTASH_URL
+    } = process.env;
+
+        
+//"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOnsibmFtZSI6IlJpdGhlc2giLCJlbWFpbCI6InRlc3RlbWFpbEBzb21ldGhpbmcuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkNHRUMXVNS1lnWHcyRlZDeXlWcU5vT1ZaUWIza0M5b0dNWnMxTUxGSGJEWEx6ekVlcEZHZC4iLCJfaWQiOiI2YTMxM2NlMzFlNzBkOWNkNzMyOGNlZDUiLCJjcmVhdGVkQXQiOiIyMDI2LTA2LTE2VDEyOjA5OjA3LjQ4MVoiLCJ1cGRhdGVkQXQiOiIyMDI2LTA2LTE2VDEyOjA5OjA3LjQ4MVoiLCJfX3YiOjB9LCJpYXQiOjE3ODE2MTE3NDcsImV4cCI6MTc4MTY5ODE0N30.hPjwWkfrMUNgyOC6I4TQyrQTJZxaELtGNZOEpSP3eSo",
+//id = 6a313ce31e70d9cd7328ced5
