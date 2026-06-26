@@ -1,4 +1,7 @@
 import express from 'express';
+import cors from "cors";
+
+
 
 import { PORT } from './config/env.js';
 
@@ -25,6 +28,15 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/subscriptions', subscriptionsRouter);
 app.use('/api/v1/workflows', workflowRouter);
+
+
+app.use(cors());
+// health check route
+app.get("/api/health", (req, res) => {
+  res.json({ status: "Server is running!" });
+});
+
+
 
 
 app.use(errorMiddleware);

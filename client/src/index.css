@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount:wght@100..900&display=swap');
+@import "tailwindcss";
+
+
+
+@theme {
+  --font-bitcount: Bitcount, sans-serif;
+  --color-primary: #030014;
+}
+
+@layer base {
+  body {
+    background: #faf5f5;
+    font-family: var(--font-bitcount);
+
+  }
+
+  h2 {
+    font-family: var(--font-bitcount);
+    color: var(--color-primary);
+  }
+}
