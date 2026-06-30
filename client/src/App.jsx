@@ -3,9 +3,10 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
+import { BASE_URL } from '../config/env.js'
 
 
-const loginCard = () => {
+const LoginCard = () => {
     const [formData, setFormData] = useState({
       name: "",
       email: "",
@@ -16,7 +17,7 @@ const loginCard = () => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
       try {
         const response = await fetch("http://localhost:5500/api/v1/auth/sign-in", {
@@ -35,7 +36,33 @@ const loginCard = () => {
     };
 
     return (
-      
+      <div className='login-card' className="w-full max-w-md p-8 bg-white border border-gray-200 rounded-2xl shadow-xl  place-items-center">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className='flex items-center gap-20'>
+        <label htmlFor='email'>Email</label><input 
+          type= 'email'
+          name = 'email'
+          placeholder='Enter email address'
+          value = {formData.email}
+          onChange= {handleChange}
+          required
+          /> <br></br>
+        </div>
+        <div className='flex items-center gap-12.5'>
+          Password<input 
+            type= 'password'
+            name = 'password'
+            placeholder='Enter password'
+            value = {formData.password}
+            onChange= {handleChange}
+            required
+          /><br></br>
+          </div>
+          <div className='flex justify-center'>
+          <button type='submit' className='w-fit'>Sign In</button>
+          </div>
+        </form>
+      </div>
     )
 };
 
@@ -48,11 +75,14 @@ const App = () => {
   return (
     <div>
       <Navbar />
+       <div className="flex flex-1 items-center justify-center">
+      <LoginCard />
+      </div>
     </div>
   )
 }
 
-fetch("http://localhost:5500/api/health")
+fetch(`${BASE_URL}/api/health`)
   .then((res) => res.json())
   .then((data) => console.log(data));
 
