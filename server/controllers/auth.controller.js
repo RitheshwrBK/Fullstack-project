@@ -72,6 +72,13 @@ export const signIn = async (req,res,next) => {
 
         const token = jwt.sign({userId: user._id},JWT_SECRET,{expiresIn: JWT_EXPIRES_IN});
 
+        res.cookie("accessToken", token, {
+            httpOnly: true,
+            secure: false,          // true in production with HTTPS
+            sameSite: "lax",        // "none" if frontend/backend are on different domains with HTTPS
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+
         res.status(200).json({
             success: true,
             message: "User Signed In Successfully",

@@ -4,11 +4,15 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import { BASE_URL } from '../config/env.js'
+import { Routes, Route } from "react-router-dom";
+
+import gameBoy from './assets/image copy.png'
+import star from './assets/star_pixel.png'
+import bubble from './assets/bubble.png'
 
 
 const LoginCard = () => {
     const [formData, setFormData] = useState({
-      name: "",
       email: "",
       password: "",
     });
@@ -26,6 +30,7 @@ const LoginCard = () => {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include", // Include cookies in the request
           body: JSON.stringify(formData),
         });
 
@@ -40,30 +45,64 @@ const LoginCard = () => {
         const data = await response.json();
         console.log(data);
 
+        if (data.success){
+          // Redirect to dashboard
+          window.location.href = "/dashboard";
+        }
+
         
       } catch (error) {
         console.error("Error:", error);
       }
     };
 
+    const containerStyle = {
+    backgroundImage: `url(${gameBoy})`,
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    height: '100vh',
+    width: '100vw',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  };
+
+  const cardStyle = {
+    backgroundColor: 'rgba(255, 255, 255, 0.95)', // Semi-transparent white
+    padding: '40px',
+    borderRadius: '12px',
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2)',
+    width: '100%',
+    maxWidth: '400px',
+  };
+
     return (
-      <div className='login-card' className=" relative w-full max-w-md p-8 bg-white border border-gray-200 rounded-2xl shadow-xl  place-items-center">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <div className='login-card' className="relative
+    w-[800px]
+    h-[960px]
+    bg-contain
+    bg-no-repeat
+    bg-center"
+      style={{ backgroundImage: `url(${gameBoy})`,
+    backgroundPosition: "-60px -50px" }}
+      >
+        <form onSubmit={handleSubmit} className="absolute
+      left-[23%]
+      top-[18%]
+      w-[54%]
+      h-[33%]
+      flex
+      flex-col
+      justify-center
+      gap-3
+      px-2">
         <div className='flex items-center gap-20'>
-        <label htmlFor='email'>Email</label><input 
+        <label htmlFor='email' className= 'block mb-1'>Email</label><input className='w-full'
           type= 'email'
           name = 'email'
           placeholder='Enter email address'
           value = {formData.email}
-          onChange= {handleChange}
-          required
-          /> <br></br>
-        </div>
-         <div className='flex items-center gap-13'>
-        <label htmlFor='name'>Name</label><input 
-          name = 'name'
-          placeholder='Enter username'
-          value = {formData.name}
           onChange= {handleChange}
           required
           /> <br></br>
@@ -99,23 +138,78 @@ const LoginCard = () => {
             </button>
           </div>
         </>
-      </div>
+      
     )
-};
+}
+</div>
+)};
 
 const Navbar = () => {
   return (<nav className="flex items-center rounded-xl justify-between px-8 py-5 p-16 border-b border-gray-200 bg-[#f76840] mt-3 mb-3 my-3 mx-3">
     <h2 className="Bitcount text-6xl">Subscription Tracker</h2>
   </nav>
 )}
+const LoginPage = () => {
+  return (
+    <>
+     <div className="relative  min-h-screen  bg-[#F3EDE3] bg-[radial-gradient(#e3d8c6_3px,transparent_3px)]">
+      <img
+  src={star}
+  className="star top-150 left-16 w-70 z-50 "
+  style={{
+    width: "300px"}}
+/>
+
+<img
+  src={star}
+  className="star top-48 right-20"
+  style={{ animationDelay: "0.8s",
+  width: "300px"}}
+/>
+
+<img
+  src={star}
+  className="star bottom-24 right-32"
+  style={{ animationDelay: "1.6s" ,
+  width: "300px"
+  }}
+/>
+
+<img
+  src={bubble}
+  className="star top-12 left-16 w-70 z-50 "
+  style={{
+    width: "300px"}}
+/>
+
+<img
+  src={bubble}
+  className="star top-25 right-90"
+  style={{ animationDelay: "0.8s",
+  width: "300px"}}
+/>
+
+<img
+  src={bubble}
+  className="star bottom-60 right-60"
+  style={{ animationDelay: "1.6s" ,
+  width: "300px"
+  }}
+  />
+    <Navbar />
+    <div className="flex-1 flex items-center justify-center">
+    <LoginCard />
+    </div>
+    </div>
+    </>
+  )
+}
 const App = () => {
   return (
-    <div>
-      <Navbar />
-       <div className="flex flex-1 items-center justify-center">
-      <LoginCard />
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/dashboard" element={<div>Dashboard</div>} />
+    </Routes>
   )
 }
 

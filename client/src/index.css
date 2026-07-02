@@ -20,3 +20,22 @@
     color: var(--color-primary);
   }
 }
+@keyframes bob {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.star {
+  position: absolute;
+  z-index: 999;
+  width: 40px;
+  image-rendering: pixelated;
+  animation: bob 2.5s ease-in-out infinite;
+}

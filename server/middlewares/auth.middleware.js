@@ -4,7 +4,7 @@ import User from "../models/user.models.js";
 
 const authorize = async (req,res,next) => {
     try{
-        let token;
+        const token = req.cookies.accessToken;
 
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
             token = req.headers.authorization.split(' ')[1];
